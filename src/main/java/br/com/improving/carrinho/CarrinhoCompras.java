@@ -16,7 +16,7 @@ import br.com.improving.carrinho.exception.ValorUnitarioNegativoException;
  */
 public class CarrinhoCompras {
 
-	private List<Itens> itens;
+	private List<Item> itens;
 
 	public CarrinhoCompras() {
 		this.itens = new ArrayList<>();
@@ -36,7 +36,7 @@ public class CarrinhoCompras {
 	 * @param valorUnitario Valor unitário do item
 	 * @param quantidade Quantidade de itens
 	 */
-	public void adicionarItem(Produtos produto, BigDecimal valorUnitario, int quantidade) {
+	public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
 		if (produto == null) throw new ProdutoInvalidoException("Produto não pode ser nulo");
 		else if (valorUnitario.compareTo(BigDecimal.ZERO) < 0)
 			throw new ValorUnitarioNegativoException("O valor unitário do item deve ser maior ou igual a zero");
@@ -44,13 +44,13 @@ public class CarrinhoCompras {
 			throw new QuantidadeNegativaException("O valor unitário do item deve ser maior ou igual a zero");
 		else {
 
-			Itens resultadoItem = this.itens.stream()
+			Item resultadoItem = this.itens.stream()
 					.filter(item -> item.getProduto().equals(produto))
 					.findFirst()
 					.orElse(null);
 
 			if (resultadoItem == null) {
-				final Itens novoItem = new Itens(produto, valorUnitario, quantidade);
+				final Item novoItem = new Item(produto, valorUnitario, quantidade);
 				this.itens.add(novoItem);
 			} else {
 				final int posicaoItem = this.itens.indexOf(resultadoItem);
@@ -72,10 +72,10 @@ public class CarrinhoCompras {
 	 * @return Retorna um boolean, tendo o valor true caso o produto exista no carrinho de compras e false
 	 * caso o produto não exista no carrinho.
 	 */
-	public boolean removerItem(Produtos produto) {
+	public boolean removerItem(Produto produto) {
 		if (produto == null) return false;
 
-		final Optional<Itens> itemEspecifico = encontrarItem(produto);
+		final Optional<Item> itemEspecifico = encontrarItem(produto);
 
 		if (!itemEspecifico.isPresent()) return false;
 
@@ -117,11 +117,11 @@ public class CarrinhoCompras {
 	 *
 	 * @return itens
 	 */
-	public Collection<Itens> getItens() {
+	public Collection<Item> getItens() {
 		return this.itens;
 	}
 
-	private Optional<Itens> encontrarItem(Produtos produto) {
+	private Optional<Item> encontrarItem(Produto produto) {
 		return this.itens.stream()
 				.filter(item -> item.getProduto().equals(produto))
 				.findFirst();
