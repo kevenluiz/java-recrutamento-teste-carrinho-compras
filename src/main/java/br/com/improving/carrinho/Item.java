@@ -27,6 +27,7 @@ public class Item {
      * @return Produto
      */
     public Produto getProduto() {
+        return produto;
     }
 
     /**
@@ -35,6 +36,7 @@ public class Item {
      * @return BigDecimal
      */
     public BigDecimal getValorUnitario() {
+        return valorUnitario;
     }
 
     /**
@@ -43,6 +45,7 @@ public class Item {
      * @return int
      */
     public int getQuantidade() {
+        return quantidade;
     }
 
     /**
@@ -51,6 +54,13 @@ public class Item {
      * @return BigDecimal
      */
     public BigDecimal getValorTotal() {
+        return valorUnitario;
 
     }
+
+	public void setValorUnitario(BigDecimal valorUnitario2) {
+	}
+
+	public void setQuantidade(int i) {
+	}
 }

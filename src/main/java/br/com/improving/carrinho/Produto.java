@@ -27,6 +27,7 @@ public class Produto {
      * @return Long
      */
     public Long getCodigo() {
+        return codigo;
     }
 
     /**
@@ -35,5 +36,6 @@ public class Produto {
      * @return String
      */
     public String getDescricao() {
+        return descricao;
     }
 }
